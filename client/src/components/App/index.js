@@ -1,16 +1,20 @@
 import React, { Component } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Home from "../Home";
+import Login from '../Login';
+import Register from '../Register';
 import "./styles.scss";
-import Home from '../Home';
 
 class App extends Component {
-
   render() {
     return (
-      <div className="App">
-        <header>This is the top</header>
-        <Home/>
-
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+        </Switch>
+      </BrowserRouter>
     );
   }
 }

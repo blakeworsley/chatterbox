@@ -1,45 +1,21 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import { testGet, testPost } from "../../api.js";
+import { Link } from "react-router-dom";
 import { observer, inject } from "mobx-react";
-import MainMenu from "..MainMenu";
 import "./styles.scss";
 
 class Home extends Component {
-  state = {
-    response: "",
-    post: "",
-    responseToPost: ""
-  };
-
-  componentDidMount() {
-    testGet()
-      .then(res => this.setState({ response: res.test }))
-      .catch(err => console.log(err));
-  }
-
-  handleSubmit = async e => {
-    e.preventDefault();
-    const body = await testPost(this.state.post);
-    this.setState({ responseToPost: body });
-  };
-
   render() {
-    if (this.props.userStore.user) {
-      return (
-        <div className="container">
-          <MainMenu />
-        </div>
-      );
-    } else {
-      return <Redirect to={"/login"} />;
-    }
+    return (
+      <section className="home">
+        <Link to="/register" className='home__button'>REGISTER</Link>
+        <Link to="/login" className='home__button'>LOGIN</Link>
+      </section>
+    );
   }
 }
 
 export default inject("userStore")(observer(Home));
 
-//
 // import React, { Component } from "react";
 // import "./styles.scss";
 // import { testGet, testPost } from "../../api.js";

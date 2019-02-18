@@ -4,7 +4,7 @@ import { observer, inject } from "mobx-react";
 
 function Login(props) {
   if (props.userStore.user) {
-    return <Redirect to={"/"} />;
+    return <Redirect to={"/conversations"} />;
   } else {
     return (
       <form

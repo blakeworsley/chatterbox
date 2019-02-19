@@ -17,3 +17,16 @@
   padding: 8px;
   width: 100%;
 }
+
+.button__send {
+  background: #4e54c8;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  margin: 8px 0px 8px 8px;
+  padding: 8px;
+  &:disabled {
+    color: #333;
+    background: #ddd;
+  }
+}

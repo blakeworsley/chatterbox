@@ -1,47 +1,63 @@
 import { extendObservable, action } from "mobx";
-import { authenticateUser } from "../api.js";
 
 export default class User {
   constructor() {
     extendObservable(this, {
-      username: "blakeworsley",
-      password: "12345",
-      firstName: "Blake",
-      lastName: "Worsley",
+      username: "",
+      password: "",
+      firstName: "",
+      lastName: "",
       user: null
     });
   }
 
   checkForUser = () => {
-    const user = JSON.parse(window.localStorage.getItem("user"));
+    const user = JSON.parse(window.localStorage.getItem("currentUser"));
     if (user) this.user = user;
   };
 
   setUser = user => {
     this.user = user;
-    window.localStorage.setItem("user", JSON.stringify(user));
+    const users = JSON.parse(window.localStorage.getItem("users"));
+    if (users) {
+      users.push(user);
+      window.localStorage.setItem("users", JSON.stringify(users));
+      window.localStorage.setItem("currentUser", JSON.stringify(user));
+    } else {
+      window.localStorage.setItem("users", JSON.stringify([user]));
+      window.localStorage.setItem("currentUser", JSON.stringify(user));
+    }
   };
 
-  clearUser = () => {
+  signOut = () => {
     this.user = null;
-    window.localStorage.setItem("user", null);
+    window.localStorage.setItem("currentUser", null);
+  };
+
+  register = e => {
+    e.preventDefault();
+    if (this.username && this.password && this.firstName && this.lastName) {
+      return this.setUser({
+        username: this.username,
+        password: this.password,
+        firstName: this.firstName,
+        lastName: this.lastName
+      });
+    }
   };
 
   signIn = action(async () => {
-    const userToPost = {
-      username: this.username,
-      password: this.password
-    };
-    // const response = await authenticateUser(userToPost);
-    const response = { success: true, result: { username: this.username } };
-
-    if (response.success) {
-      this.setUser(response.result);
+    const users = JSON.parse(window.localStorage.getItem("users"));
+    const correctUser = users.filter(
+      user => user.username === this.username && user.password === this.password
+    );
+    if (correctUser.length) {
+      this.user = correctUser[0];
     }
   });
 
   signOut = action(() => {
-    this.clearUser();
+    this.signOut();
     this.user = null;
   });
 }

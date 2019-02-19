@@ -1,7 +1,6 @@
 import React from "react";
-import { observer, inject } from "mobx-react";
+import { observer } from "mobx-react";
 import "./styles.scss";
-import { chat } from "../../api";
 
 function chatInputForm(props) {
   const {
@@ -18,6 +17,8 @@ function chatInputForm(props) {
         onChange={e => setCurrentMessage(e.target.value)}
       />
       <button
+        disabled={!currentMessage}
+        className='button__send'
         onClick={e => {
           e.preventDefault();
           submitCurrentMessage(currentMessage, author);
@@ -30,29 +31,3 @@ function chatInputForm(props) {
 }
 
 export default observer(chatInputForm);
-
-// import React, { useState } from "react";
-// import "./styles.scss";
-// import { chat } from "../../api";
-//
-// function chatInputForm(props) {
-//   const [message, setMessage] = useState(0);
-//   return (
-//     <form className="conversation__form">
-//       <input
-//         className="conversation__input"
-//         onChange={e => setMessage(e.target.value)}
-//       />
-//       <button
-//         onClick={e => {
-//           e.preventDefault();
-//           chat(props.name, message);
-//         }}
-//       >
-//         enter
-//       </button>
-//     </form>
-//   );
-// }
-//
-// export default chatInputForm;

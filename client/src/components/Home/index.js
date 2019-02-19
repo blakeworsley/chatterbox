@@ -1,9 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { observer, inject } from "mobx-react";
+import { connect } from "../../api";
 import "./styles.scss";
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    connect(message => { console.log(message) });
+  }
+
   render() {
     return (
       <section className="fullpage--padded-top">

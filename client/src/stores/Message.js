@@ -1,11 +1,12 @@
-import { observable } from "mobx";
+import { extendObservable } from "mobx";
 
 export default class Message {
-  id = Math.random();
-  @observable message;
-  @observable unread = false;
-
   constructor(message) {
-    this.message = message;
+    extendObservable(this, {
+      text: message.text,
+      author: message.author,
+      id: Math.random(),
+      created: Date.now()
+    });
   }
 }

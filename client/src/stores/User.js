@@ -6,8 +6,8 @@ export default class User {
     extendObservable(this, {
       username: "blakeworsley",
       password: "12345",
-      firstName: 'Blake',
-      lastName: 'Worsley',
+      firstName: "Blake",
+      lastName: "Worsley",
       user: null
     });
   }
@@ -32,8 +32,9 @@ export default class User {
       username: this.username,
       password: this.password
     };
-    const response = await authenticateUser(userToPost);
-    console.log('>>>>', response);
+    // const response = await authenticateUser(userToPost);
+    const response = { success: true, result: { username: this.username } };
+
     if (response.success) {
       this.setUser(response.result);
     }

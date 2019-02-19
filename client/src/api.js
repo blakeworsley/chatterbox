@@ -1,3 +1,5 @@
+import openSocket from "socket.io-client";
+
 export async function testGet() {
   const response = await fetch("/api/test");
   const body = await response.json();
@@ -23,4 +25,21 @@ export async function authenticateUser({ username, password }) {
   });
   const body = await response.json();
   return body;
+}
+
+const socket = openSocket("http://localhost:5000/");
+
+export function connect(cb) {
+  socket.on("chat", message => {
+    console.log(message);
+    return cb(message);
+  });
+}
+
+export function chat(user, val){
+  socket.emit('chat', user, val);
+}
+
+export function updateChat(func){
+  socket.on('chat', func)
 }

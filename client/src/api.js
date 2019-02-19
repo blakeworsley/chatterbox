@@ -14,3 +14,13 @@ export async function testPost(args) {
   const body = await response.text();
   return body;
 }
+
+export async function authenticateUser({ username, password }) {
+  const response = await fetch("/api/auth", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, password })
+  });
+  const body = await response.json();
+  return body;
+}

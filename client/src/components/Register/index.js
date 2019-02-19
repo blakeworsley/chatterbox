@@ -1,23 +1,56 @@
 import React from "react";
+import { observer, inject } from "mobx-react";
 
 function Register(props) {
   return (
-    <form>
-      <h1>Register</h1>
-      <label>
-        name
-        <input placeholder="Blake" />
-      </label>
-      <label>
-        email
-        <input placeholder="blakeworsley@gmail.com" />
-      </label>
-      <label>
-        password
-        <input placeholder="**********" />
-      </label>
-    </form>
+    <section className="fullpage--padded-top">
+      <h1 className="title">Register</h1>
+      <form
+        className="form--with-space"
+        onSubmit={e => {
+          e.preventDefault();
+          props.userStore.signIn();
+        }}
+      >
+        <label className="label">
+          FIRST NAME
+          <input
+            className="input"
+            defaultValue={props.userStore.firstName}
+            onChange={e => (props.userStore.firstName = e.target.value)}
+            placeholder="Blake"
+          />
+        </label>
+        <label className="label">
+          LAST NAME
+          <input
+            className="input"
+            defaultValue={props.userStore.lastName}
+            onChange={e => (props.userStore.lastName = e.target.value)}
+            placeholder="Worsley"
+          />
+        </label>
+        <label className="label">
+          USERNAME
+          <input
+            className="input"
+            defaultValue={props.userStore.username}
+            onChange={e => (props.userStore.username = e.target.value)}
+            placeholder="blakeworsley@gmail.com"
+          />
+        </label>
+        <label className="label">
+          PASSWORD
+          <input
+            className="input"
+            defaultValue={props.userStore.password}
+            onChange={e => (props.userStore.password = e.target.value)}
+            placeholder="**********"
+          />
+        </label>
+        <button className="button">SUBMIT</button>
+      </form>
+    </section>
   );
 }
-
-export default Register;
+export default inject("userStore")(observer(Register));

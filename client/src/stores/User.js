@@ -1,8 +1,13 @@
 import { extendObservable, action } from "mobx";
+import { authenticateUser } from "../api.js";
 
 export default class User {
   constructor() {
     extendObservable(this, {
+      username: "blakeworsley",
+      password: "12345",
+      firstName: 'Blake',
+      lastName: 'Worsley',
       user: null
     });
   }
@@ -13,17 +18,25 @@ export default class User {
   };
 
   setUser = user => {
+    this.user = user;
     window.localStorage.setItem("user", JSON.stringify(user));
   };
 
-  clearUser = user => {
+  clearUser = () => {
+    this.user = null;
     window.localStorage.setItem("user", null);
   };
 
-  signIn = action(() => {
-    const user = { userId: "23j4i23j42hzfguzk", name: "blake" };
-    this.setUser(user);
-    this.user = user;
+  signIn = action(async () => {
+    const userToPost = {
+      username: this.username,
+      password: this.password
+    };
+    const response = await authenticateUser(userToPost);
+    console.log('>>>>', response);
+    if (response.success) {
+      this.setUser(response.result);
+    }
   });
 
   signOut = action(() => {

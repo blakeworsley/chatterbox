@@ -6,9 +6,16 @@ import "./styles.scss";
 class Home extends Component {
   render() {
     return (
-      <section className="home">
-        <Link to="/register" className='home__button'>REGISTER</Link>
-        <Link to="/login" className='home__button'>LOGIN</Link>
+      <section className="fullpage--padded-top">
+        <h1 className="title">Chatterbox</h1>
+        <form className="form--with-space">
+          <Link to="/register" className="button" disabled>
+            REGISTER
+          </Link>
+          <Link to="/login" className="button">
+            LOGIN
+          </Link>
+        </form>
       </section>
     );
   }

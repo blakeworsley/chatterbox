@@ -1,13 +1,18 @@
 import React from "react";
+import { inject } from "mobx-react";
 import { Link } from "react-router-dom";
 import "./styles.scss";
 
 function MainMenu(props) {
   return (
     <header className="menu">
-      <h1>Chatterbox</h1>
+      <h1 className="title">Chatterbox</h1>
       <nav>
-        <Link className="menu__button" to={"conversation/new"}>
+        <Link
+          className="menu__button--text"
+          to={"/"}
+          onClick={props.userStore.clearUser}
+        >
           Sign Out
         </Link>
         <Link className="menu__button" to={"conversation/new"}>
@@ -18,4 +23,4 @@ function MainMenu(props) {
   );
 }
 
-export default MainMenu;
+export default inject("userStore")(MainMenu);

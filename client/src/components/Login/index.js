@@ -1,29 +1,43 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { observer, inject } from "mobx-react";
+import "./styles.scss";
 
 function Login(props) {
   if (props.userStore.user) {
     return <Redirect to={"/conversations"} />;
   } else {
     return (
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          props.userStore.signIn();
-        }}
-      >
-        <h1>Login</h1>
-        <label>
-          email
-          <input placeholder="blakeworsley@gmail.com" />
-        </label>
-        <label>
-          password
-          <input placeholder="**********" />
-        </label>
-        <button>Submit</button>
-      </form>
+      <section className="fullpage--padded-top">
+        <h1 className="title">Login</h1>
+        <form
+          className="form--with-space"
+          onSubmit={e => {
+            e.preventDefault();
+            props.userStore.signIn();
+          }}
+        >
+          <label className="label">
+            USERNAME
+            <input
+              className="input"
+              defaultValue={props.userStore.username}
+              onChange={e => (props.userStore.username = e.target.value)}
+              placeholder="blakeworsley@gmail.com"
+            />
+          </label>
+          <label className="label">
+            PASSWORD
+            <input
+              className="input"
+              defaultValue={props.userStore.password}
+              onChange={e => (props.userStore.password = e.target.value)}
+              placeholder="**********"
+            />
+          </label>
+          <button className="button">SUBMIT</button>
+        </form>
+      </section>
     );
   }
 }

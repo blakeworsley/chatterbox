@@ -6,11 +6,13 @@ import Home from "../Home";
 import Login from "../Login";
 import Register from "../Register";
 import UserStore from "../../stores/User";
+import RootStore from "../../stores/Root";
 import Conversation from "../Conversation";
 import Conversations from "../Conversations";
 import "./styles.scss";
 
 const userStore = new UserStore();
+const rootStore = new RootStore();
 
 class App extends Component {
   componentDidMount() {
@@ -19,7 +21,7 @@ class App extends Component {
 
   render() {
     return (
-      <Provider userStore={userStore}>
+      <Provider userStore={userStore} rootStore={rootStore}>
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={Home} />

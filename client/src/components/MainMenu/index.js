@@ -11,7 +11,7 @@ function MainMenu(props) {
         <Link
           className="menu__button--text"
           to={"/"}
-          onClick={props.userStore.clearUser}
+          onClick={props.userStore.signOut}
         >
           Sign Out
         </Link>

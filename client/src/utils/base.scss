@@ -1,5 +1,7 @@
+@import "./variables";
+
 .title {
-  color: #4e54c8;
+  color: $color-primary-1;
   display: block;
   font-family: "Open Sans", sans-serif;
   font-size: 32px;
@@ -8,7 +10,7 @@
 }
 
 .text {
-  color: #353a96;
+  color: $color-primary-2;
   display: block;
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
@@ -28,7 +30,7 @@
   background: white;
   border-radius: 5px;
   border: 1px solid #333;
-  color: #4e54c8;
+  color: $color-primary-1;
   display: block;
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
@@ -38,9 +40,9 @@
 }
 
 .button {
-  background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
-  background: #4e54c8;
-  background: linear-gradient(to left, #8f94fb, #4e54c8);
+  background: -webkit-linear-gradient(to left, $color-primary-2, $color-primary-1);
+  background: $color-primary-1;
+  background: linear-gradient(to left, $color-primary-2, $color-primary-1);
   border-radius: 5px;
   border: 0px;
   color: white;

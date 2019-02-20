@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { observer, inject } from "mobx-react";
 import "./styles.scss";
 
@@ -9,7 +9,13 @@ function Login(props) {
   } else {
     return (
       <section className="fullpage--padded-top">
-        <h1 className="title">Login</h1>
+        <div className='fullpage__header'>
+          <h1 className="title">Login</h1>
+          <Link to="/register" className="fullpage__header--title">
+            Register
+          </Link>
+        </div>
+
         <form
           className="form--with-space"
           onSubmit={e => {

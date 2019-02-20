@@ -1,0 +1,15 @@
+@import '../../utils/variables.scss';
+
+.fullpage__header {
+  display: flex;
+}
+
+.fullpage__header--title {
+  color: lighten($color-primary-1, 30);
+  text-decoration: none;
+  display: block;
+  font-weight: bold;
+  font-family: "Open Sans", sans-serif;
+  font-size: 32px;
+  padding: 8px;
+}

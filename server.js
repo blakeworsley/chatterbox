@@ -1,46 +1,29 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const app = express();
+const express = require("express")();
 const port = process.env.PORT || 5000;
-const http = require("http").Server(app);
+const http = require("http").Server(express);
 const io = require("socket.io")(http);
 
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-//
-// app.post("/api/auth", (req, res) => {
-//   if (req.body.username == "blakeworsley" && req.body.password == "12345") {
-//     res.send({
-//       success: true,
-//       message: `Welcome ${req.body.username}`,
-//       result: {
-//         firstName: "Blake",
-//         lastName: "Worsley",
-//         username: "blakeworsley@gmail.com",
-//         id: "b3k89o32bgn8s"
-//       }
-//     });
-//   } else {
-//     res.send({ success: false, message: `Incorrect Login Information` });
-//   }
-// });
+const chatMessages = [];
 
-const messages = [];
+io.on("connection", socket => {
+  console.log("a user has joined");
 
-io.on("connection", function(socket) {
-  console.log("a user connected");
+  io.emit("this", { blake: "coooool" });
 
-  io.emit("this", { will: "be received by everyone" });
+  socket.broadcast.emit("has joined");
 
-  socket.on("chat", function(msg) {
-    messages.push(msg);
-    const message = `${msg.author.username}: ${msg.text}`;
-    console.log(message, messages);
-    io.emit('chat', msg);
+  socket.on("chat", msg => {
+    chatMessages.push(msg.author.firstName + ": " + msg.text);
+    io.emit("chat", msg);
+    console.log(chatMessages);
   });
 
-  socket.on("disconnect", function() {
-    console.log("user disconnected");
+  socket.on("fetchMessages", msg => {
+    io.emit("");
+  });
+
+  socket.on("disconnect", () => {
+    console.log("a user has left");
   });
 });
 

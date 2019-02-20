@@ -29,11 +29,6 @@ export default class User {
     }
   };
 
-  signOut = () => {
-    this.user = null;
-    window.localStorage.setItem("currentUser", null);
-  };
-
   register = e => {
     e.preventDefault();
     if (this.username && this.password && this.firstName && this.lastName) {
@@ -46,18 +41,19 @@ export default class User {
     }
   };
 
-  signIn = action(async () => {
+  signIn = action(() => {
     const users = JSON.parse(window.localStorage.getItem("users"));
     const correctUser = users.filter(
       user => user.username === this.username && user.password === this.password
     );
     if (correctUser.length) {
       this.user = correctUser[0];
+      this.setUser(correctUser[0]);
     }
   });
 
   signOut = action(() => {
-    this.signOut();
     this.user = null;
+    window.localStorage.removeItem("currentUser");
   });
 }

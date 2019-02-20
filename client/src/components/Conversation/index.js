@@ -1,40 +1,44 @@
-import React from "react";
+import React, { Component } from "react";
 import { observer, inject } from "mobx-react";
 import SecondaryMenu from "../SecondaryMenu";
 import ChatInputForm from "../ChatInputForm";
 import Message from "../Message";
-import ConversationStore from "../../stores/Conversation";
-import { updateChat } from "../../api.js";
 import "./styles.scss";
 
-const store = new ConversationStore();
-updateChat(msg => store.messages.push(msg));
+class Conversation extends Component {
+  constructor(props) {
+    super(props);
+    this.props.rootStore.newConversation("chat");
+    this.store = this.props.rootStore.getConversation("chat");
+    this.store.updateChat(msg => this.store.messages.push(msg));
+  }
 
-function conversation(props) {
-  return (
-    <section className="fullpage">
-      <SecondaryMenu />
-      <ul className="conversations__list">
-        {store.messages.map(message => (
-          <Message
-            key={message.id}
-            author={
-              message.author.firstName == props.userStore.user.firstName
-                ? "Me"
-                : message.author.firstName
-            }
-            text={message.text}
-          />
-        ))}
-      </ul>
-      <ChatInputForm
-        author={props.userStore.user}
-        setCurrentMessage={store.setCurrentMessage}
-        submitCurrentMessage={store.submitCurrentMessage}
-        currentMessage={store.currentMessage}
-      />
-    </section>
-  );
+  render() {
+    return (
+      <section className="fullpage">
+        <SecondaryMenu />
+        <ul className="conversations__list">
+          {this.store.messages.map(message => (
+            <Message
+              key={message.id}
+              author={
+                message.author.firstName === this.props.userStore.user.firstName
+                  ? "Me"
+                  : message.author.firstName
+              }
+              text={message.text}
+            />
+          ))}
+        </ul>
+        <ChatInputForm
+          author={this.props.userStore.user}
+          setCurrentMessage={this.store.setCurrentMessage}
+          submitCurrentMessage={this.store.submitCurrentMessage}
+          currentMessage={this.store.currentMessage}
+        />
+      </section>
+    );
+  }
 }
 
-export default inject("userStore")(observer(conversation));
+export default inject("userStore", "rootStore")(observer(Conversation));

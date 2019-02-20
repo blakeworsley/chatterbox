@@ -1,3 +1,27 @@
 $color-primary-1: #4e54c8;
 $color-primary-2: #353a96;
 $color-secondary-1: #d24dff;
+$color-secondary-2: #4519c3;
+$color-shade-black: #222;
+$color-shade-dark: #333;
+$color-shade-medium: #555;
+$color-shade-light: #ddd;
+$color-shade-white: white;
+
+@mixin default-font {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  color: $color-shade-dark;
+}
+
+@mixin large-font {
+  font-family: "Open Sans", sans-serif;
+  font-size: 32px;
+  color: $color-shade-dark;
+}
+
+@mixin small-font {
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
+  color: $color-shade-dark;
+}

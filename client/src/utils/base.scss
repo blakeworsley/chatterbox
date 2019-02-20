@@ -1,54 +1,54 @@
 @import "./variables";
 
 .title {
+  @include large-font;
   color: $color-primary-1;
   display: block;
-  font-family: "Open Sans", sans-serif;
-  font-size: 32px;
   font-weight: bold;
   padding: 8px;
 }
 
 .text {
+  @include default-font;
   color: $color-primary-2;
   display: block;
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
   padding: 8px;
 }
 
 .label {
+  @include default-font;
   display: flex;
   flex-direction: column;
-  color: #444;
+  color: $color-shade-medium;
   padding: 8px;
-  font-family: "Open Sans", sans-serif;
   font-weight: bold;
 }
 
 .input {
+  @include default-font;
   background: white;
   border-radius: 5px;
-  border: 1px solid #333;
+  border: 1px solid $color-shade-dark;
   color: $color-primary-1;
   display: block;
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
   margin-top: 8px;
   padding: 8px;
   text-decoration: none;
 }
 
 .button {
-  background: -webkit-linear-gradient(to left, $color-primary-2, $color-primary-1);
+  @include default-font;
+  background: -webkit-linear-gradient(
+    to left,
+    $color-primary-2,
+    $color-primary-1
+  );
   background: $color-primary-1;
   background: linear-gradient(to left, $color-primary-2, $color-primary-1);
   border-radius: 5px;
   border: 0px;
   color: white;
   display: block;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
   margin: 8px;
   padding: 8px 24px;
   text-align: center;

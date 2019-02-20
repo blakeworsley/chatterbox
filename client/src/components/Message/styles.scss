@@ -1,28 +1,27 @@
+@import "../../utils/variables";
+
 .message__author--left {
-  color: #888;
+  @include small-font;
+  color: $color-shade-medium;
   display: block;
-  font-family: "Open Sans", sans-serif;
-  font-size: 12px;
 }
 
 .message__text--left {
-  color: #333;
+  @include default-font;
+  color: $color-shade-dark;
   display: block;
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
   padding-top: 8px;
 }
 
 .message--left {
+  @include default-font;
   align-items: flex-start;
   background: white;
   border-radius: 5px 5px 5px 0px;
   border: 0px;
-  color: #333;
+  color: $color-shade-dark;
   display: flex;
   flex-direction: column;
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
   margin: 8px auto 8px 8px;
   padding: 8px;
   text-decoration: none;
@@ -31,15 +30,14 @@
 }
 
 .message--right {
+  @include default-font;
   align-items: flex-end;
-  background: rgb(69, 25, 195);
+  background: $color-primary-1;
   border-radius: 5px 5px 0px 5px;
   border: 0px;
   color: white;
   display: flex;
   flex-direction: column;
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
   margin: 8px 8px 8px auto;
   padding: 8px;
   text-decoration: none;
@@ -48,16 +46,14 @@
 }
 
 .message__author--right {
-  color: #ccc;
+  @include small-font;
+  color: $color-shade-light;
   display: block;
-  font-family: "Open Sans", sans-serif;
-  font-size: 12px;
 }
 
 .message__text--right {
+  @include default-font;
   color: #eee;
   display: block;
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
   padding-top: 8px;
 }

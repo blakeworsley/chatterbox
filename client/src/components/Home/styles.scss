@@ -1,10 +1,7 @@
-@import '../../utils/variables';
-
-.home {
-
-}
+@import "../../utils/variables";
 
 .home__button {
+  @include default-font;
   display: block;
   text-align: center;
   margin: 8px;
@@ -13,8 +10,15 @@
   border-radius: 5px;
   border: 0px;
   text-decoration: none;
-  font-family: 'Open Sans', sans-serif;
-  background: $color-primary-2;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, $color-primary-1, $color-primary-2);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, $color-primary-1, $color-primary-2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: $color-primary-2; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    $color-primary-1,
+    $color-primary-2
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    $color-primary-1,
+    $color-primary-2
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }

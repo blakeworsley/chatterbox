@@ -31,8 +31,5 @@ export default class Root {
     this.socket.on("chat", message => {
       return callback(message);
     });
-    this.socket.on("rooms", rooms => {
-      
-    })
   };
 }

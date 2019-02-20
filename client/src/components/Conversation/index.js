@@ -8,15 +8,16 @@ import "./styles.scss";
 class Conversation extends Component {
   constructor(props) {
     super(props);
-    this.props.rootStore.newConversation("chat");
-    this.store = this.props.rootStore.getConversation("chat");
-    this.store.updateChat(msg => this.store.messages.push(msg));
+    this.channel = this.props.match.params.id
+
+    this.props.rootStore.newConversation(this.channel);
+    this.store = this.props.rootStore.getConversation(this.channel);
   }
 
   render() {
     return (
       <section className="fullpage">
-        <SecondaryMenu />
+        <SecondaryMenu channel={this.channel}/>
         <ul className="conversations__list">
           {this.store.messages.map(message => (
             <Message

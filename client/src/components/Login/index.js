@@ -5,11 +5,18 @@ import "./styles.scss";
 
 function Login(props) {
   if (props.userStore.user) {
-    return <Redirect to={"/conversations"} />;
+    const to =
+      props.location &&
+      props.location.state &&
+      props.location.state.from &&
+      props.location.state.from.pathname
+        ? props.location.state.from.pathname
+        : "/conversations";
+    return <Redirect to={to} />;
   } else {
     return (
       <section className="fullpage--padded-top">
-        <div className='fullpage__header'>
+        <div className="fullpage__header">
           <h1 className="title">Login</h1>
           <Link to="/register" className="fullpage__header--title">
             Register

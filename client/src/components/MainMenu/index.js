@@ -15,9 +15,6 @@ function MainMenu(props) {
         >
           Sign Out
         </Link>
-        <Link className="menu__button" to={"conversation/new"}>
-          NEW
-        </Link>
       </nav>
     </header>
   );

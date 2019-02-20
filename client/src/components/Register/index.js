@@ -4,7 +4,14 @@ import { observer, inject } from "mobx-react";
 
 function Register(props) {
   if (props.userStore.user) {
-    return <Redirect to={"/conversations"} />;
+    const to =
+      props.location &&
+      props.location.state &&
+      props.location.state.from &&
+      props.location.state.from.pathname
+        ? props.location.state.from.pathname
+        : "/conversations";
+    return <Redirect to={to} />;
   } else {
     return (
       <section className="fullpage--padded-top">

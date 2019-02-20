@@ -43,12 +43,15 @@ export default class User {
 
   signIn = action(() => {
     const users = JSON.parse(window.localStorage.getItem("users"));
-    const correctUser = users.filter(
-      user => user.username === this.username && user.password === this.password
-    );
-    if (correctUser.length) {
-      this.user = correctUser[0];
-      this.setUser(correctUser[0]);
+    if (users) {
+      const correctUser = users.filter(
+        user =>
+          user.username === this.username && user.password === this.password
+      );
+      if (correctUser.length) {
+        this.user = correctUser[0];
+        this.setUser(correctUser[0]);
+      }
     }
   });
 

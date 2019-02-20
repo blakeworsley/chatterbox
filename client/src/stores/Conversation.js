@@ -1,22 +1,22 @@
-import { extendObservable, action, decorate } from "mobx";
+import { extendObservable } from "mobx";
 import Message from "./Message";
 
 export default class Conversation {
   constructor(options) {
     extendObservable(this, {
       socket: options.socket,
-      channel: 'chat',
+      channel: options.channel,
       currentMessage: "",
       messages: []
     });
+    this.socket.on(options.channel + "s", messages =>
+      this.messages.replace(messages)
+    );
+    this.updateChat();
   }
 
-  chat = (user, val) => {
-    this.socket.emit(this.channel, user, val);
-  };
-
   updateChat = func => {
-    this.socket.on(this.channel, func);
+    this.socket.on(this.channel, msg => this.messages.push(msg));
   };
 
   setCurrentMessage = value => {
@@ -30,10 +30,6 @@ export default class Conversation {
 
   addMessage = msg => {
     const message = new Message(msg);
-    this.chat(message);
+    this.socket.emit(this.channel, message);
   };
 }
-
-decorate(Conversation, {
-  addMessage: action
-});

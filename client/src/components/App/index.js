@@ -14,9 +14,11 @@ import "./styles.scss";
 const userStore = new UserStore();
 const rootStore = new RootStore();
 
+
 class App extends Component {
   componentDidMount() {
     userStore.checkForUser();
+    rootStore.connect(message => console.log("connect: ", message));
   }
 
   render() {

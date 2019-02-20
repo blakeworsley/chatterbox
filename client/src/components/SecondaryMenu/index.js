@@ -8,7 +8,7 @@ function SecondaryMenu(props) {
     <header className="menu">
       <div className='menu__title-container'>
         <Link to={'/conversations'} className='button__back'>back</Link>
-        <h1 className="title">New</h1>
+        <h1 className="title">{props.channel}</h1>
       </div>
       <nav>
         <Link

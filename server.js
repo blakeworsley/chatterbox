@@ -3,23 +3,27 @@ const port = process.env.PORT || 5000;
 const http = require("http").Server(express);
 const io = require("socket.io")(http);
 
-const channels = [];
-const chatMessages = [];
+const channels = [{ name: "chat", messages: [] }, { name: "new", messages: [] }];
 
 io.on("connection", socket => {
+  console.log("user connected");
   socket.broadcast.emit("has joined");
 
+  io.emit("connected", channels);
+
   socket.on("chat", msg => {
-    chatMessages.push(msg);
+    console.log(`(Channel chat) ${msg.author.firstName}: ${msg.text}`);
+    channels[0].messages.push(msg);
     io.emit("chat", msg);
-    console.log(chatMessages, '<<<< Chat');
   });
 
   socket.on("new", msg => {
+    console.log(`(Channel new) ${msg.author.firstName}: ${msg.text}`);
+    channels[1].messages.push(msg);
     io.emit("new", msg);
   });
 
-  socket.on("disconnect", () => {
+  socket.on("disconnect", (user) => {
     console.log("a user has left");
   });
 });

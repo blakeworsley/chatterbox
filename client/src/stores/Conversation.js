@@ -7,7 +7,7 @@ export default class Conversation {
       socket: options.socket,
       channel: options.channel,
       currentMessage: "",
-      messages: []
+      messages: options.messages
     });
     this.socket.on(options.channel + "s", messages =>
       this.messages.replace(messages)

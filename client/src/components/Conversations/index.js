@@ -18,12 +18,13 @@ class Conversations extends Component {
           </Link>
         </header>
         <ul className="conversation__list">
-          <Link to="/conversation/chat" className="conversation__list--link">
-            Chat
-          </Link>
-          <Link to="/conversation/room" className="conversation__list--link">
-            Room
-          </Link>
+          {this.props.rootStore.conversations.map( convo => {
+            return (
+              <Link key={convo.channel} to={`conversation/${convo.channel}`} className="conversation__list--link">
+                {convo.channel.toUpperCase()}
+              </Link>
+            )
+          })}
         </ul>
       </section>
     );

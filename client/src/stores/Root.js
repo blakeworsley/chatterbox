@@ -11,10 +11,11 @@ export default class Root {
     });
   }
 
-  newConversation = (channel = "chat") => {
+  newConversation = (channel = "chat", messages = []) => {
     const conversation = new Conversation({
       socket: this.socket,
-      channel: channel
+      channel: channel,
+      messages: messages
     });
     this.conversations.push(conversation);
     return conversation;
@@ -30,6 +31,14 @@ export default class Root {
   connect = callback => {
     this.socket.on("chat", message => {
       return callback(message);
+    });
+
+    this.socket.on("connected", channels => {
+      if (this.conversations.length === 0) {
+        channels.forEach(channel => {
+          return this.newConversation(channel.name, channel.messages);
+        });
+      }
     });
   };
 }

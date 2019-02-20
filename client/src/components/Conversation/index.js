@@ -8,37 +8,40 @@ import "./styles.scss";
 class Conversation extends Component {
   constructor(props) {
     super(props);
-    this.channel = this.props.match.params.id
-
-    this.props.rootStore.newConversation(this.channel);
-    this.store = this.props.rootStore.getConversation(this.channel);
+    this.channel = this.props.match.params.id;
   }
 
   render() {
-    return (
-      <section className="fullpage">
-        <SecondaryMenu channel={this.channel}/>
-        <ul className="conversations__list">
-          {this.store.messages.map(message => (
-            <Message
-              key={message.id}
-              author={
-                message.author.firstName === this.props.userStore.user.firstName
-                  ? "Me"
-                  : message.author.firstName
-              }
-              text={message.text}
-            />
-          ))}
-        </ul>
-        <ChatInputForm
-          author={this.props.userStore.user}
-          setCurrentMessage={this.store.setCurrentMessage}
-          submitCurrentMessage={this.store.submitCurrentMessage}
-          currentMessage={this.store.currentMessage}
-        />
-      </section>
-    );
+    const store = this.props.rootStore.getConversation(this.channel);
+    if (store) {
+      return (
+        <section className="fullpage">
+          <SecondaryMenu channel={this.channel} />
+          <ul className="conversations__list">
+            {store.messages.map(message => (
+              <Message
+                key={message.id}
+                author={
+                  message.author.firstName ===
+                  this.props.userStore.user.firstName
+                    ? "Me"
+                    : message.author.firstName
+                }
+                text={message.text}
+              />
+            ))}
+          </ul>
+          <ChatInputForm
+            author={this.props.userStore.user}
+            setCurrentMessage={store.setCurrentMessage}
+            submitCurrentMessage={store.submitCurrentMessage}
+            currentMessage={store.currentMessage}
+          />
+        </section>
+      );
+    } else {
+      return <div>loading</div>;
+    }
   }
 }
 

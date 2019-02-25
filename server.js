@@ -11,6 +11,14 @@ io.on("connection", socket => {
 
   io.emit("connected", channels);
 
+  // channels.forEach(channel => {
+  //   socket.on(channel.name, (msg) => {
+  //     console.log(`(Channel ${channel.name}) ${msg.author.firstName}: ${msg.text}`);
+  //     channels[0].messages.push(msg);
+  //     io.emit("chat", msg);
+  //   })
+  // })
+
   socket.on("chat", msg => {
     console.log(`(Channel chat) ${msg.author.firstName}: ${msg.text}`);
     channels[0].messages.push(msg);

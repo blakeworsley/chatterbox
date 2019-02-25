@@ -1,8 +1,7 @@
 chatterbox
 ------
 
-###
-Tech Stack:
+### Tech Stack:
 - React
 - Mobx
 - SCSS
@@ -11,8 +10,7 @@ Tech Stack:
 - Jest (Testing)
 
 
-###
-The process:
+### The process:
 
 Original intent of the project was to get a working version of some type of websocket based chat application.
 
@@ -25,8 +23,7 @@ I implemented mobx and continued to build and refactor components as I went, bui
 I created a model for the conversations so when a new Conversation was created it was stored in the conversations array in the root store of the project. A small refactor made this possible and allowed for one array to hold the necessary information for most of the application.
 
 
-###
-Happy Little Accidents:
+### Happy Little Accidents:
 
 I made the mistake of getting into authentication early on and had to back myself out of there and stub some users to conserve time. If I continued down that road, I would have used firebase for the ease of setup.
 
@@ -42,8 +39,7 @@ Chat channels are fixed but my next implementation would allow users to create t
 
 I would have like to publish this as well but I ran out of time
 
-###
-How to Run:
+### How to Run:
 
 To run the project on your local machine, clone this project and follow these steps
 
